@@ -2,6 +2,7 @@
 
 const epilogue = require('./epilogue')
 const db = require('APP/db')
+const geocoder = require('geocoder');
 
 const eventRoutes = require('express').Router() 
 
@@ -43,6 +44,33 @@ eventRoutes.put('/:eventId/:userId', function(req, res, next){
 	Event.findById(req.params.eventId)
 	.then(event => {
 		event.addUser(req.params.userId)
+	})
+})
+
+eventRoutes.post('/location', function(req, res, next){
+	const meters = req.body.distance * 1609.34;
+	let coords;
+	geocoder.geocode(req.body.location, function ( err, data ) {
+  		if(err){
+  			res.status(400).send(err)
+  		}
+  		else if(data.status === 'ZERO_RESULTS'){
+          console.log("NO LOCATIONS IN YOUR AREA")
+          throw new Error("no results")
+        }
+        else{
+        	coords = [data.results[0].geometry.location.lat, data.results[0].geometry.location.lng]
+        }
+
+	});
+	Event.findAll({
+			where: sequelize.where(sequelize.fn(
+					'ST_DWithin',
+					sequelize.col('events.location'), sequelize.fn('ST_GeographyFromText', `SRID=4326;${coords}`), meters), true
+				)
+	})
+	.then(events => {
+		res.status(200).json(events)
 	})
 })
 

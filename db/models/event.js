@@ -17,7 +17,7 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	location: {
-		type: Sequelize.ARRAY(Sequelize.FLOAT),
+  		type: Sequelize.GEOGRAPHY,
 		allowNull: false
 	},
 	training: {
