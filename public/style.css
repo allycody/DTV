@@ -72,14 +72,14 @@ li {
 .alert-right {
     right: 0;
     margin-top: 50%;
-    background: red;
+    background: green;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
 }
 
 .alert-left {
     left: 0;
-    background: orange;
+    background: red;
     margin-top: 50%;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -93,7 +93,7 @@ li {
 }
 .alert-up {
     left: 0;
-    background: green;
+    background: yellow;
     margin-top: 50%;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
