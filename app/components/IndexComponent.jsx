@@ -51,7 +51,7 @@ var Card = React.createClass({displayName: "Card",
             WebkitTransform: initialTranslate,
             transform: initialTranslate,
             zIndex: this.props.index,
-            backgroundImage: 'url("images/' + this.props.image + '")'
+            backgroundImage: 'url("/' + this.props.image + '")'
         }, this.props.style);
 
         var classes = addons.classSet(merge(
@@ -126,6 +126,10 @@ var DraggableCard = React.createClass({displayName: "DraggableCard",
                 this.props.onOutScreenLeft(this.props.cardId);
             } else if ((this.state.x + (card.offsetWidth - 50)) > screen.offsetWidth) {
                 this.props.onOutScreenRight(this.props.cardId);
+            } else if (this.state.y < -50) {
+                this.props.onOutScreenUp(this.props.cardId);
+            } else if ((this.state.y + (card.offsetHeight - 50)) > screen.offsetHeight) {
+                this.props.onOutScreenDown(this.props.cardId);
             } else {
                 this.resetPosition();
                 this.setState({
@@ -217,6 +221,7 @@ var Tinderable = React.createClass({displayName: "Tinderable",
         return {
             cards: this.props.initialCardsData,
             alertLeft: false,
+            alertDown: false,
             alertRight: false
         };
     },
@@ -227,6 +232,10 @@ var Tinderable = React.createClass({displayName: "Tinderable",
                 this.setState({alertLeft: false});
             } else if (side === 'right') {
                 this.setState({alertRight: false});
+            } else if (side === 'down') {
+                this.setState({alertDown: false});
+            } else if (side === 'up') {
+                this.setState({alertUp: false});
             }
         }.bind(this), 3000);
 
@@ -235,7 +244,9 @@ var Tinderable = React.createClass({displayName: "Tinderable",
                 return c.id !== cardId;
             }),
             alertLeft: side === 'left',
-            alertRight: side === 'right'
+            alertRight: side === 'right',
+            alertDown: side === 'down',
+            alertUp: side === 'up'
         });
     },
 
@@ -246,6 +257,8 @@ var Tinderable = React.createClass({displayName: "Tinderable",
                 index: index,
                 onOutScreenLeft: this.removeCard.bind(this, 'left'),
                 onOutScreenRight: this.removeCard.bind(this, 'right'),
+                onOutScreenDown: this.removeCard.bind(this, 'down'),
+                onOutScreenUp: this.removeCard.bind(this, 'up'),
                 title: c.title,
                 text: c.text,
                 image: c.image
@@ -263,9 +276,19 @@ var Tinderable = React.createClass({displayName: "Tinderable",
             'alert-left': true,
             'alert': true
         });
+        var classesAlertUp = addons.classSet({
+            'alert-visible': this.state.alertUp,
+            'alert-up': true,
+            'alert': true
+        });
         var classesAlertRight = addons.classSet({
             'alert-visible': this.state.alertRight,
             'alert-right': true,
+            'alert': true
+        });
+        var classesAlertDown = addons.classSet({
+            'alert-visible': this.state.alertDown,
+            'alert-down': true,
             'alert': true
         });
 
@@ -273,6 +296,8 @@ var Tinderable = React.createClass({displayName: "Tinderable",
             React.createElement("div", null,
                 React.createElement("div", {className: classesAlertLeft}, "left"),
                 React.createElement("div", {className: classesAlertRight}, "right"),
+                React.createElement("div", {className: classesAlertDown}, "down"),
+                React.createElement("div", {className: classesAlertUp}, "up"),
                 React.createElement("div", {id: "cards"},
                     cards
                 )

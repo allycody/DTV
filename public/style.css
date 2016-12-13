@@ -82,3 +82,15 @@ li {
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
+.alert-down {
+    left: 0;
+    background: blue;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.alert-up {
+    left: 0;
+    background: green;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
