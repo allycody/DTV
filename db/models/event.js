@@ -21,7 +21,7 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	training: {
-		type: Sequelize.INTEGER
+		type: Sequelize.ARRAY(Seqeulize.STRING)
 	},
 	image: {
 		type: Sequelize.STRING
@@ -39,4 +39,4 @@ const Event = db.define('events', {
 
 })
 
-module.exports = Item
+module.exports = Event
