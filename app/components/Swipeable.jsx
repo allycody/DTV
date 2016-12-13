@@ -15,13 +15,19 @@ var Card = React.createClass({displayName: "Card",
     },
 
     setInitialPosition: function() {
-        var screen = document.getElementById('main'),
-            card = ReactDOM.findDOMNode(this),
+        var screen = document.getElementById('main');
+        var card = ReactDOM.findDOMNode(this);
 
-            initialPosition = {
-                x: Math.round((screen.offsetWidth - card.offsetWidth) / 2),
-                y: Math.round((screen.offsetHeight - card.offsetHeight) / 2)
-            };
+
+        console.log('screen', screen)
+        console.log('card', card)
+
+
+        var initialPosition = {
+            x: Math.round((screen.offsetWidth - card.offsetWidth) / 2),
+            y: Math.round((screen.offsetHeight - card.offsetHeight) / 2)
+        };
+
 
         this.setState({
             initialPosition: initialPosition
@@ -50,8 +56,7 @@ var Card = React.createClass({displayName: "Card",
             msTransform: initialTranslate,
             WebkitTransform: initialTranslate,
             transform: initialTranslate,
-            zIndex: this.props.index,
-            backgroundImage: 'url("/' + this.props.image + '")'
+            zIndex: this.props.index
         }, this.props.style);
 
         var classes = addons.classSet(merge(
@@ -63,9 +68,9 @@ var Card = React.createClass({displayName: "Card",
 
         return (
                 React.createElement("div", {style: style, className: classes},
-                React.createElement("h1", null, this.props.title),
-                React.createElement("p", null, this.props.text),
-                React.createElement("img", { src: this.props.image})
+                React.createElement("h1", null, this.props.name),
+                React.createElement("p", null, this.props.description),
+                React.createElement("img", { src: this.props.image, style: {width: '200px', height: '270px'}}),
                 React.createElement("p", null, this.props.date)
                 )
         );
@@ -93,7 +98,6 @@ var DraggableCard = React.createClass({displayName: "DraggableCard",
         var screen = document.getElementById('main'),
             card = ReactDOM.findDOMNode(this);
 
-        console.log('THIS IS THE SCREEN', screen.availHeight)
         var initialPosition = {
             x: Math.round((screen.offsetWidth - card.offsetWidth) / 2),
             y: Math.round((screen.offsetHeight - card.offsetHeight) / 2)
@@ -235,6 +239,13 @@ var Swipeable = React.createClass({displayName: "Tinderable",
     //
     //   })
     // },
+
+    setCards: function(cards) {
+      this.setState({
+        cards: cards
+      })
+    },
+
     removeCard: function(side, cardId) {
         setTimeout(function(){
             if (side === 'left') {
@@ -260,6 +271,9 @@ var Swipeable = React.createClass({displayName: "Tinderable",
     },
 
     render: function() {
+      console.log('IS THIS HITTINGSDFSFSFSF')
+      console.log('what is the cards', this.state.cards)
+
         var cards = this.state.cards.map(function(c, index, coll) {
             var props = {
                 cardId: c.id,
@@ -268,8 +282,8 @@ var Swipeable = React.createClass({displayName: "Tinderable",
                 onOutScreenRight: this.removeCard.bind(this, 'right'),
                 onOutScreenDown: this.removeCard.bind(this, 'down'),
                 onOutScreenUp: this.removeCard.bind(this, 'up'),
-                title: c.title,
-                text: c.text,
+                name: c.name,
+                description: c.description,
                 image: c.image
             };
 

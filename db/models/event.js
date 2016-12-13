@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('APP/db')
 
 const Event = db.define('events', {
-	name: { 
+	name: {
 		type: Sequelize.STRING,
 		allowNull: false
 	},
@@ -24,14 +24,14 @@ const Event = db.define('events', {
 		type: Sequelize.ARRAY(Sequelize.STRING)
 	},
 	image: {
-		type: Sequelize.STRING
+		type: Sequelize.TEXT
 	},
 	numNeeded: {
 		type: Sequelize.INTEGER,
 		allowNull: false
 	},
 	urgent: {
-		type: Sequelize.BOOLEAN, 
+		type: Sequelize.BOOLEAN,
 		defaultValue: false
 	},
 	category: {
