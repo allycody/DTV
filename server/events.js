@@ -28,7 +28,7 @@ eventRoutes.get('/active', function(req, res, next){
 	.catch(next)
 })
 
-eventRoutes.get('/filtered', function(req, res, next){
+eventRoutes.post('/filtered', function(req, res, next){
 	console.log("REQ BODY: ", req.body)
 	Event.findAll({
 		where: {
@@ -36,6 +36,13 @@ eventRoutes.get('/filtered', function(req, res, next){
 			// add more filters 
 
 		}
+	})
+})
+
+eventRoutes.put('/:eventId/:userId', function(req, res, next){
+	Event.findById(req.params.eventId)
+	.then(event => {
+		event.addUser(req.params.userId)
 	})
 })
 
