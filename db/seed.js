@@ -16,9 +16,9 @@ const seedEvents = () => {
     return Event.create({
       name:'Oxfam Event 1',
       description:'Oxfams annual fundraiser',
-      date:'12/12',
+      date: Date.now(),
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
-      image:'/url',
+      image:'portrait1.jpg',
       numNeeded:100,
       urgent:true,
       category:['fundraiser,outdoors']
