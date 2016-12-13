@@ -1,9 +1,12 @@
 'use strict'
 
-const epilogue = require('./epilogue')
 const db = require('APP/db')
+const geocoder = require('geocoder');
+const axios = require('axios');
+const sequelize = require('sequelize')
 
-const eventRoutes = require('express').Router() 
+
+const eventRoutes = require('express').Router()
 
 // Custom routes go here.
 const Event = db.models.events
@@ -46,6 +49,47 @@ eventRoutes.put('/:eventId/:userId', function(req, res, next){
 	})
 })
 
+eventRoutes.post('/location', function(req, res, next){
+	console.log("IN ROUTE")
+	const meters = parseInt(req.body.distance) * 1609.34;
+	getLocation(req.body.location)
+	.then((coords) => {
+		console.log("COORDS: ", coords)
+		let coordString = `POINT(${coords[0]} ${coords[1]})`
+		console.log("COORDS: ", coords)
+		return Event.findAll({
+			where: sequelize.where(sequelize.fn(
+					'ST_DWithin',
+					sequelize.col('events.location'), sequelize.fn('ST_GeographyFromText', `SRID=4326;${coordString}`), meters), true
+				)
+		})
+	})
+	.then(events => {
+		res.status(200).json(events)
+	})
+	.catch(err => console.log("ERROR IN LOCATION ROUTE: ", err))
+})
+
+function getLocation(loc){
+	return new Promise(function(resolve, reject) {
+        geocoder.geocode(loc, function (err, data) {
+          if(err) reject(err);
+          resolve(data);
+        })
+    })
+    .then(data => {
+      console.log("DATA STATUS: ", data.status)
+        if(data.status === 'ZERO_RESULTS'){
+          console.log("data status zero")
+          return "fail"
+        }
+        else{
+          let LL = [data.results[0].geometry.location.lat, data.results[0].geometry.location.lng]
+          return LL
+        } 
+    })
+    .catch(err => console.log(err))
+}
+
 module.exports = eventRoutes
 
-// Epilogue will automatically create standard RESTful routes

@@ -16,7 +16,7 @@ const Charity = db.define('charities', {
 		}
 	},
 	location: {
-		type: Sequelize.ARRAY(Sequelize.FLOAT),
+  		type: Sequelize.GEOGRAPHY,
 		allowNull: false
 	},
 	image: {
