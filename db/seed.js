@@ -14,11 +14,71 @@ const seedEvents = () => {
   .then(charity => {
     globalCharity = charity
     return Event.create({
-      name:'Oxfam Event 1',
-      description:'Oxfams annual fundraiser',
+      name:'BBB Charity',
+      description:'Because of BBB',
       date:'12/12',
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
-      image:'/url',
+      image:'bbb.jpg',
+      numNeeded:100,
+      urgent:true,
+      category:['fundraiser,outdoors']
+    })
+  })
+  .then(event => {
+    globalCharity.addEvent(event)
+  })
+  .then(() => {
+    return Event.create({
+      name:'Charity Water',
+      description:'We need more water',
+      date:'12/12',
+      location:{type: 'Point', coordinates: [40.705691, -74.009342]},
+      image:'charitywater.jpg',
+      numNeeded:100,
+      urgent:true,
+      category:['fundraiser,outdoors']
+    })
+  })
+  .then(event => {
+    globalCharity.addEvent(event)
+  })
+  .then(() => {
+    return Event.create({
+      name:'Trees Charity',
+      description:'We love trees',
+      date:'12/12',
+      location:{type: 'Point', coordinates: [40.705691, -74.009342]},
+      image:'trees.jpg',
+      numNeeded:100,
+      urgent:true,
+      category:['fundraiser,outdoors']
+    })
+  })
+  .then(event => {
+    globalCharity.addEvent(event)
+  })
+  .then(() => {
+    return Event.create({
+      name: 'Yoga for Charity',
+      description:'Likeminded yoga ninjas',
+      date:'12/12',
+      location:{type: 'Point', coordinates: [40.705691, -74.009342]},
+      image:'yoga.jpg',
+      numNeeded:100,
+      urgent:true,
+      category:['fundraiser,outdoors']
+    })
+  })
+  .then(event => {
+    globalCharity.addEvent(event)
+  })
+  .then(() => {
+    return Event.create({
+      name:'ART 4 CHARITY',
+      description:' ',
+      date:'12/12',
+      location:{type: 'Point', coordinates: [40.705691, -74.009342]},
+      image:'charityart.jpg',
       numNeeded:100,
       urgent:true,
       category:['fundraiser,outdoors']
@@ -33,5 +93,5 @@ db.didSync
   .then(() => db.sync({force: true}))
   .then(() => seedCharities())
   .then(() => seedEvents())
-  .catch(error => console.error(error))    
+  .catch(error => console.error(error))
   // .finally(() => db.close())
