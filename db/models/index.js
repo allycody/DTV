@@ -9,11 +9,11 @@ const User = require('./user')
 const Event = require('./event')
 const Charity = require('./charity')
 
-User.belongsToMany(Charity)
-Charity.belongsToMany(User)
+
 Charity.hasMany(Event)
-User.belongsToMany(Event)
-Event.belongsToMany(User)
+Event.belongsTo(Charity)
+User.belongsToMany(Event,{through:'UserEvent'})
+Event.belongsToMany(User,{through:'UserEvent'})
 
 module.exports = db;
 

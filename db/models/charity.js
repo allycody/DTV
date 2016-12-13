@@ -28,4 +28,4 @@ const Charity = db.define('charities', {
 
 })
 
-module.exports = Item
+module.exports = Charity

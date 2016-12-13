@@ -44,4 +44,4 @@ const Event = db.define('events', {
 
 })
 
-module.exports = Item
+module.exports = Event
