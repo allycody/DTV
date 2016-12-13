@@ -21,7 +21,7 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	training: {
-		type: Sequelize.ARRAY(Seqeulize.STRING)
+		type: Sequelize.ARRAY(Sequelize.STRING)
 	},
 	image: {
 		type: Sequelize.STRING
