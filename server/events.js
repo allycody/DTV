@@ -28,6 +28,17 @@ eventRoutes.get('/active', function(req, res, next){
 	.catch(next)
 })
 
+eventRoutes.get('/filtered', function(req, res, next){
+	console.log("REQ BODY: ", req.body)
+	Event.findAll({
+		where: {
+			active: true,
+			// add more filters 
+
+		}
+	})
+})
+
 module.exports = eventRoutes
 
 // Epilogue will automatically create standard RESTful routes

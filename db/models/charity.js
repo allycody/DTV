@@ -16,7 +16,7 @@ const Charity = db.define('charities', {
 		}
 	},
 	location: {
-		type: Sequelize.STRING,
+		type: Sequelize.ARRAY(Sequelize.FLOAT),
 		allowNull: false
 	},
 	image: {

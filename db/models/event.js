@@ -17,7 +17,7 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	location: {
-		type: Sequelize.STRING,
+		type: Sequelize.ARRAY(Sequelize.FLOAT),
 		allowNull: false
 	},
 	training: {
