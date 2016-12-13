@@ -9,7 +9,8 @@ const customUserRoutes = require('express').Router()
 
 module.exports = customUserRoutes
 
-// Epilogue will automatically create standard RESTful routes
+
+//Epilogue will automatically create standard RESTful routes
 const users = epilogue.resource({
   model: db.model('users'),
   endpoints: ['/users', '/users/:id']

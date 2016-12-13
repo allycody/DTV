@@ -5,7 +5,7 @@ const Charity = require('./models/charity')
 
 const seedCharities = () => db.Promise.map([
   {name: 'Oxfam', email: 'Oxfam@dtf.com', image:'/empty',location: {type: 'Point', coordinates: [40.705691, -74.009342]}},
-  {name: 'Unicef', email: 'Unicef@dtf.com', image:'/empty',location:'{type: 'Point', coordinates: [40.705691, -74.009342]}},
+  {name: 'Unicef', email: 'Unicef@dtf.com', image:'/empty',location: {type: 'Point', coordinates: [40.705691, -74.009342]}},
 ], charities => db.model('charities').create(charities))
 
 const seedEvents = () => {
@@ -17,7 +17,7 @@ const seedEvents = () => {
       name:'Oxfam Event 1',
       description:'Oxfams annual fundraiser',
       date:'12/12',
-      location:90210,
+      location:{type: 'Point', coordinates: [40.705691, -74.009342]},
       image:'/url',
       numNeeded:100,
       urgent:true,

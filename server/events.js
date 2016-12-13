@@ -1,10 +1,10 @@
 'use strict'
 
-const epilogue = require('./epilogue')
 const db = require('APP/db')
 const geocoder = require('geocoder');
+const axios = require('axios');
 
-const eventRoutes = require('express').Router() 
+const eventRoutes = require('express').Router()
 
 // Custom routes go here.
 const Event = db.models.events
@@ -48,9 +48,15 @@ eventRoutes.put('/:eventId/:userId', function(req, res, next){
 })
 
 eventRoutes.post('/location', function(req, res, next){
-	const meters = req.body.distance * 1609.34;
+	console.log("IN ROUTE")
+	console.log("location: ", req.body.location)
+	console.log("distance: ", req.body.distance)
+	const meters = parseInt(req.body.distance) * 1609.34;
+	console.log("meters: ", meters)
 	let coords;
+	console.log("GEOCODER: ", geocoder)
 	geocoder.geocode(req.body.location, function ( err, data ) {
+  		console.log("IN GEOCODER")
   		if(err){
   			res.status(400).send(err)
   		}
@@ -62,18 +68,22 @@ eventRoutes.post('/location', function(req, res, next){
         	coords = [data.results[0].geometry.location.lat, data.results[0].geometry.location.lng]
         }
 
-	});
-	Event.findAll({
+	})
+	.then((resp) => {
+		console.log("RESP: ", resp)
+		console.log("COORDS: ", coords)
+		return Event.findAll({
 			where: sequelize.where(sequelize.fn(
 					'ST_DWithin',
 					sequelize.col('events.location'), sequelize.fn('ST_GeographyFromText', `SRID=4326;${coords}`), meters), true
 				)
+		})
 	})
 	.then(events => {
 		res.status(200).json(events)
 	})
+	.catch(err => console.log("ERROR IN LOCATION ROUTE: ", err))
 })
 
 module.exports = eventRoutes
 
-// Epilogue will automatically create standard RESTful routes
