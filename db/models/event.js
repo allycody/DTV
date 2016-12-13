@@ -13,15 +13,15 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	date: {
-		type:Sequelize.TEXT,
+		type:Sequelize.DATE,
 		allowNull: false
 	},
 	location: {
-		type: Sequelize.INTEGER,
+		type: Sequelize.STRING,
 		allowNull: false
 	},
 	training: {
-		type: Sequelize.INTEGER
+		type: Sequelize.ARRAY(Sequelize.STRING)
 	},
 	image: {
 		type: Sequelize.STRING
@@ -31,7 +31,8 @@ const Event = db.define('events', {
 		allowNull: false
 	},
 	urgent: {
-		type: Sequelize.BOOLEAN
+		type: Sequelize.BOOLEAN, 
+		defaultValue: false
 	},
 	category: {
 		type: Sequelize.ARRAY(Sequelize.STRING)
