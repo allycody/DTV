@@ -302,8 +302,8 @@ var Swipeable = React.createClass({displayName: "Tinderable",
 
         return (
             React.createElement("div", null,
-                React.createElement("div", {className: classesAlertLeft}, "Saved"),
-                React.createElement("div", {className: classesAlertRight}, "Removed"),
+                React.createElement("div", {className: classesAlertLeft}, "Pass"),
+                React.createElement("div", {className: classesAlertRight}, "Going"),
                 React.createElement("div", {className: classesAlertDown}, "down"),
                 React.createElement("div", {className: classesAlertUp}, "up"),
                 React.createElement("div", {id: "cards"},
