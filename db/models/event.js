@@ -35,6 +35,10 @@ const Event = db.define('events', {
 	},
 	category: {
 		type: Sequelize.ARRAY(Sequelize.STRING)
+	},
+	active: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: true
 	}
 
 })

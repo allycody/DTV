@@ -21,6 +21,9 @@ const Charity = db.define('charities', {
 	},
 	image: {
 		type: Sequelize.STRING
+	}, 
+	category: {
+		type: Sequelize.ARRAY(Sequelize.STRING)
 	}
 
 })
