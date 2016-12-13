@@ -66,6 +66,11 @@ li {
     line-height: 3rem;
 }
 
+img{
+    width: 200px;
+    height: 270px;
+}
+
 .alert-visible {
     opacity: 1;
 }

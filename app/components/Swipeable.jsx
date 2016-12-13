@@ -56,8 +56,7 @@ var Card = React.createClass({displayName: "Card",
             msTransform: initialTranslate,
             WebkitTransform: initialTranslate,
             transform: initialTranslate,
-            zIndex: this.props.index,
-            backgroundImage: 'url("/' + this.props.image + '")'
+            zIndex: this.props.index
         }, this.props.style);
 
         var classes = addons.classSet(merge(
@@ -70,7 +69,9 @@ var Card = React.createClass({displayName: "Card",
         return (
                 React.createElement("div", {style: style, className: classes},
                 React.createElement("h1", null, this.props.name),
-                React.createElement("p", null, this.props.description)
+                React.createElement("p", null, this.props.description),
+                React.createElement("img", { src: this.props.image, style: {width: '200px', height: '270px'}}),
+                React.createElement("p", null, this.props.date)
                 )
         );
     }

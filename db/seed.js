@@ -31,7 +31,7 @@ const seedEvents = () => {
     return Event.create({
       name:'Charity Water',
       description:'We need more water',
-      date:'12/12',
+      date: Date.now(),
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
       image:'charitywater.jpg',
       numNeeded:100,
@@ -46,7 +46,7 @@ const seedEvents = () => {
     return Event.create({
       name:'Trees Charity',
       description:'We love trees',
-      date:'12/12',
+      date: Date.now(),
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
       image:'trees.jpg',
       numNeeded:100,
@@ -61,7 +61,7 @@ const seedEvents = () => {
     return Event.create({
       name: 'Yoga for Charity',
       description:'Likeminded yoga ninjas',
-      date:'12/12',
+      date: Date.now(),
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
       image:'yoga.jpg',
       numNeeded:100,
@@ -76,7 +76,7 @@ const seedEvents = () => {
     return Event.create({
       name:'ART 4 CHARITY',
       description:' ',
-      date:'12/12',
+      date: Date.now(),
       location:{type: 'Point', coordinates: [40.705691, -74.009342]},
       image:'charityart.jpg',
       numNeeded:100,
