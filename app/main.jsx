@@ -3,23 +3,10 @@ import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
-import Tinderable from './components/IndexComponent'
+import Swipeable from './components/Swipeable'
+import Footer from './components/Footer'
 import store from './store'
-import Login from './components/Login'
-import WhoAmI from './components/WhoAmI'
-
-const Home = connect(
-  ({ auth }) => ({ user: auth })
-) (
-  ({ user, children }) =>
-    <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>
-      {children}
-    </div>
-)
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let data = [
     {
@@ -48,9 +35,16 @@ let data = [
     }
 ];
 
+const App = () => (
+  <MuiThemeProvider>
+    <div>
+    <Swipeable initialCardsData={data} />
+    <Footer />
+    </div>
+  </MuiThemeProvider>
+);
+
 render (
-  <Provider store={store}>
-    <Tinderable initialCardsData={data} />
-  </Provider>,
+    <App />,
   document.getElementById('main')
 )

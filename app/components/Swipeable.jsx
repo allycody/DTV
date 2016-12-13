@@ -216,7 +216,7 @@ var DraggableCard = React.createClass({displayName: "DraggableCard",
     }
 });
 
-var Tinderable = React.createClass({displayName: "Tinderable",
+var Swipeable = React.createClass({displayName: "Tinderable",
     getInitialState: function() {
         return {
             cards: this.props.initialCardsData,
@@ -306,4 +306,4 @@ var Tinderable = React.createClass({displayName: "Tinderable",
     }
 });
 
-module.exports = Tinderable;
+module.exports = Swipeable;

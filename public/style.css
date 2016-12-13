@@ -71,6 +71,7 @@ li {
 
 .alert-right {
     right: 0;
+    margin-top: 50%;
     background: red;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
@@ -79,18 +80,21 @@ li {
 .alert-left {
     left: 0;
     background: orange;
+    margin-top: 50%;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
 .alert-down {
     left: 0;
     background: blue;
+    margin-top: 50%;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
 .alert-up {
     left: 0;
     background: green;
+    margin-top: 50%;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
