@@ -222,10 +222,17 @@ var Swipeable = React.createClass({displayName: "Tinderable",
             cards: this.props.initialCardsData,
             alertLeft: false,
             alertDown: false,
-            alertRight: false
+            alertRight: false,
+            alertUp: false
         };
     },
 
+    // showMoreDetails: function(side, cardId) {
+    //   this.setState({
+    //     alertUp : true,
+    //
+    //   })
+    // },
     removeCard: function(side, cardId) {
         setTimeout(function(){
             if (side === 'left') {
@@ -280,6 +287,7 @@ var Swipeable = React.createClass({displayName: "Tinderable",
             'alert-visible': this.state.alertUp,
             'alert-up': true,
             'alert': true
+
         });
         var classesAlertRight = addons.classSet({
             'alert-visible': this.state.alertRight,
@@ -294,8 +302,8 @@ var Swipeable = React.createClass({displayName: "Tinderable",
 
         return (
             React.createElement("div", null,
-                React.createElement("div", {className: classesAlertLeft}, "left"),
-                React.createElement("div", {className: classesAlertRight}, "right"),
+                React.createElement("div", {className: classesAlertLeft}, "Saved"),
+                React.createElement("div", {className: classesAlertRight}, "Removed"),
                 React.createElement("div", {className: classesAlertDown}, "down"),
                 React.createElement("div", {className: classesAlertUp}, "up"),
                 React.createElement("div", {id: "cards"},
